@@ -184,7 +184,7 @@ public class MainActivity extends Activity {
         Collections.sort(activities, new ResolveInfo.DisplayNameComparator(packageManager));
         for (ResolveInfo resolver : activities) {
             String appName = (String) resolver.loadLabel(packageManager);
-            if (appName.equals("Settings") || appName.equals("Light Android Launcher"))
+            if (appName.equals("Settings") || appName.equals("Light ePaper Launcher"))
                 continue;
             adapter.add(appName);
             packageNames.add(resolver.activityInfo.packageName);
