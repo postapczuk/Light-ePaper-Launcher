@@ -1,13 +1,19 @@
-# Min Launcher
-  
-  
+Light ePaper Launcher
+======================
+
+Configurable, minimalistic, super lightweight app launcher with a low memory usage and small install size
+---------------------------------------------------------------------------------------------------------
+
+This is e-Paper version of the [Light Android Launcher](https://github.com/light-launcher/Light-Android-Launcher) (courrently) with limited features
+
 <p align="center">
-<img src="https://raw.githubusercontent.com/Collinux/minimalist-launcher/master/launcher_main.png" width="230"><br>
-<b>Super lightweight app launcher with a low memory usage and small install size. Lightning fast on any device including support for the first version of Android.</b><br><br>
+  <img src="https://github.com/postapczuk/Light-ePaper-Launcher/blob/master/preview.gif?raw=true" style="max-height:600px"/>
 </p>
 
-### Philosophy
-  Most modern launchers encourage poor behavioral patterns that grab your attention, leading to constant use of non-productive applications. The objective of a home screen is to enable users to find and launch the apps they need as fast as possible. This launcher goes back to the fundementals of user interation with mobile devices by making the experience quick, simple, and productive.
+Android version
+===============
+Works with each Android version from 2.0 (API 5 _Eclair_)
 
-### Free & Open Source
-   There are no trackers, no ads, and no device permissions. Peer reviewed code under a GPLv2 license.
+Free & Open Source
+==================
+No trackers, no ads, and no device permissions. Open Source Code, available under GPLv2 license.
