@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.github.postapczuk.leplauncher"
-        minSdkVersion 4
+        minSdkVersion 5
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"

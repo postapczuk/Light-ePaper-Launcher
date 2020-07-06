@@ -4,7 +4,7 @@
 
     <application
         android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:label="Minimalist Launcher"
+        android:label="Light ePaper Launcher"
         android:excludeFromRecents="true"
         android:clearTaskOnLaunch="true"
         android:stateNotNeeded="true"
