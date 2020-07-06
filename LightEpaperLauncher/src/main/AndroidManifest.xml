@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="launcher.minimalist.com">
+    package="com.github.postapczuk.leplauncher">
 
     <application
         android:icon="@android:drawable/ic_menu_sort_by_size"

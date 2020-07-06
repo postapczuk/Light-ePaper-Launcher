@@ -1,18 +1,21 @@
-package launcher.minimalist.com;
+package com.github.postapczuk.leplauncher;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,22 +32,42 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Setup UI elements
-        listView = new ListView(this);
-        listView.setVerticalScrollBarEnabled(false);
-        listView.setId(android.R.id.list);
-        listView.setDivider(null);
+        createListView();
         setContentView(listView);
-        ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) listView.getLayoutParams();
-        p.setMargins(100, 0, 0, 0);
 
-        // Get a list of all the apps installed
+        fillAppNames();
+        assignClickListeners();
+        fetchAppList();
+    }
+
+    private void createListView() {
+        listView = new ListView(this);
+        listView.setId(android.R.id.list);
+        listView.setBackgroundColor(Color.WHITE);
+        int pxToDp = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                60,
+                getApplicationContext().getResources().getDisplayMetrics());
+        listView.setPadding(pxToDp, pxToDp, pxToDp, pxToDp);
+    }
+
+    private void fillAppNames() {
         packageManager = getPackageManager();
         adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, new ArrayList<String>());
+                this, android.R.layout.simple_list_item_1,
+                new ArrayList<String>()) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
+                textView.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
         packageNames = new ArrayList<>();
+    }
 
-        // Tap on an item in the list to launch the app
+    private void assignClickListeners() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,7 +79,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Long press on an item in the list to open the app settings
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -71,27 +93,20 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
-        fetchAppList();
     }
 
     private void fetchAppList() {
-        // Start from a clean adapter when refreshing the list
         adapter.clear();
         packageNames.clear();
 
-        // Query the package manager for all apps
         List<ResolveInfo> activities = packageManager.queryIntentActivities(
                 new Intent(Intent.ACTION_MAIN, null).addCategory(Intent.CATEGORY_LAUNCHER), 0);
 
-        // Sort the applications by alphabetical order and add them to the list
         Collections.sort(activities, new ResolveInfo.DisplayNameComparator(packageManager));
         for (ResolveInfo resolver : activities) {
-
-            // Exclude the settings app and this launcher from the list of apps shown
             String appName = (String) resolver.loadLabel(packageManager);
-            if (appName.equals("Settings") || appName.equals("Minimalist Launcher"))
+            if (appName.equals("Settings") || appName.equals("Light Android Launcher"))
                 continue;
-
             adapter.add(appName);
             packageNames.add(resolver.activityInfo.packageName);
         }
@@ -100,7 +115,6 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // Prevent the back button from closing the activity.
         fetchAppList();
     }
 }
