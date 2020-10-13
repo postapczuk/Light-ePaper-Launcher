@@ -1,1 +1,1 @@
-A super lightweight app launcher with a low memory usage and small install size
+A super lightweight app launcher for Epaper devices with Android 2 and higher.
